@@ -5,7 +5,28 @@ let isRunning = false;
 let isStudy = true;
 let timerInterval = null;
 
+function resetTimer() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    isStudy = true;
+    remainingSeconds = 60 * studyMinutes;
+    render();
+}
+document.getElementById('resetBtn').addEventListener('click', resetTimer);
 
+function skipBlock() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    isStudy = !isStudy;
+    if (isStudy) {
+        remainingSeconds = 60 * studyMinutes;
+    } else {
+        remainingSeconds = 60 * breakMinutes;
+    }
+    
+    render();
+}
+document.getElementById('skipBtn').addEventListener('click', skipBlock);
 
 function toggleSettings() {
     const panel = document.getElementById("settingsPanel");
@@ -34,6 +55,7 @@ function applyConfig() {
     render();
     document.getElementById('settingsPanel').style.display = 'none';
 }
+document.getElementById('applyBtn').addEventListener('click', applyConfig);
 
 function tick() {
     remainingSeconds = remainingSeconds - 1;
@@ -49,7 +71,7 @@ function tick() {
 }
 
 function toggleStartPause() {
-    document.getElementById('startPauseBtn')
+    const startPauseBtn = document.getElementById('startPauseBtn')
     if (isRunning) {
         clearInterval(timerInterval);
         isRunning = false;
@@ -60,6 +82,7 @@ function toggleStartPause() {
         startPauseBtn.textContent = "Pause"
     }
 }
+document.getElementById('startPauseBtn').addEventListener('click', toggleStartPause);
 
 function render() {
     const minutes = Math.floor(remainingSeconds / 60);
@@ -73,5 +96,22 @@ function render() {
 
     document.getElementById('timerDisplay').textContent = formattedTime;
 
+    document.getElementById("modeLabel").textContent = isStudy ? 'STUDY' : 'BREAK';
 
+    // CHANGES CLASSES SO THAT STUDY AND BREAK HAVE DIFERENT COLORS.    
+    const timerDisplay = document.getElementById('timerDisplay');
+    const modeLabel = document.getElementById('modeLabel');
+
+    timerDisplay.classList.remove('study-mode', 'break-mode');
+    modeLabel.classList.remove('study-mode', 'break-mode');
+
+    if (isStudy) {
+        timerDisplay.classList.add('study-mode');
+        modeLabel.classList.add('study-mode');
+    } else {
+        timerDisplay.classList.add('break-mode');
+        modeLabel.classList.add('break-mode');
+    }
+
+    document.getElementById('startPauseBtn').textContent = isRunning ? 'Pause' : 'Start';
 }
