@@ -30,11 +30,7 @@ document.getElementById('skipBtn').addEventListener('click', skipBlock);
 
 function toggleSettings() {
     const panel = document.getElementById("settingsPanel");
-    if (panel.style.display === "none") {
-        panel.style.display = "block";
-    } else {
-        panel.style.display = "none";
-    }
+    panel.classList.toggle('open');
 }
 document.getElementById("settingsToggle").addEventListener("click", toggleSettings);
 
@@ -53,7 +49,7 @@ function applyConfig() {
         isStudy = true;
     }
     render();
-    document.getElementById('settingsPanel').style.display = 'none';
+    document.getElementById('settingsPanel').classList.remove('open');
 }
 document.getElementById('applyBtn').addEventListener('click', applyConfig);
 
