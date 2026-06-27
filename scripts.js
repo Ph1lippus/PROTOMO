@@ -84,13 +84,13 @@ function render() {
     const minutes = Math.floor(remainingSeconds / 60);
     const seconds = remainingSeconds % 60;
 
-    // Format timer so that as trailing zeros whenever the numebr is less then 10, so that always has 2 digits in minutes and seconds. 
-    const formattedTime = 
-        String(minutes).padStart(2, '0')   + 
-                                    ':'    +   
-        String(seconds).padStart(2, '0');
+    const minuteDigits = String(minutes).padStart(2, '0').split('');
+    const secondDigits = String(seconds).padStart(2, '0').split('');
 
-    document.getElementById('timerDisplay').textContent = formattedTime;
+    document.getElementById('timerMinutesTens').textContent = minuteDigits[0];
+    document.getElementById('timerMinutesOnes').textContent = minuteDigits[1];
+    document.getElementById('timerSecondsTens').textContent = secondDigits[0];
+    document.getElementById('timerSecondsOnes').textContent = secondDigits[1];
 
     document.getElementById("modeLabel").textContent = isStudy ? 'STUDY' : 'BREAK';
 
