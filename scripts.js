@@ -4,6 +4,7 @@ let remainingSeconds = studyMinutes * 60;
 let isRunning = false;
 let isStudy = true;
 let timerInterval = null;
+let totalStudyMinutes = 0;
 
 function resetTimer() {
     clearInterval(timerInterval);
@@ -110,4 +111,13 @@ function render() {
     }
 
     document.getElementById('startPauseBtn').textContent = isRunning ? 'Pause' : 'Start';
+}
+
+
+
+
+
+const saveTotal = localStorage.getItem(protomoTotal);
+if (protomoTotal !== null) {
+    totalStudyMinutes = protomoTotal;
 }
