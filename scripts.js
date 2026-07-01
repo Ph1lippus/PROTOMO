@@ -7,6 +7,7 @@ let timerInterval = null;
 let totalStudyMinutes = 0;
 let history = [];
 
+
 const saveHistory = localStorage.getItem("protomoHistory");
 if (saveHistory !== null) {
     history = JSON.parse(saveHistory);
@@ -16,7 +17,6 @@ const saveTotal = localStorage.getItem("protomoTotal");
 if (saveTotal !== null) {
     totalStudyMinutes = parseInt(saveTotal, 10);
 }
-
 
 function resetTimer() {
     clearInterval(timerInterval);
@@ -135,18 +135,29 @@ function render() {
 }
 
 function toggleTheme() {
-    document.body.classList.toggle("light-mode");
-    const btn = document.getElementById("themeToggle");
-    if ( document.body.classList.contains("light-mode")) {
-        btn.textContent = "Dark";
-        localStorage.setItem("protomoTheme", "light")
-    } else  {
-        btn.textContent = "Light";
-        localStorage.setItem("protomoTheme", "dark")
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    document.getElementById('themeSwitch').checked = isLight;
+    localStorage.setItem('protomoTheme', isLight ? 'light' : 'dark');
+}
+
+function toggleMenu() {
+    const menu = document.getElementById("themeMenu");
+    const toggle = document.getElementById("menuToggle");
+    const isOpen = menu.style.display === "block";
+    menu.style.display = isOpen ? "none" : "block";
+    toggle.classList.toggle("open", !isOpen);
+}
+document.getElementById("menuToggle").addEventListener("click", toggleMenu);
+
+function syncThemeSwitch() {
+    const isLight = document.body.classList.contains('light-mode');
+    const switchEl = document.getElementById('themeSwitch');
+    if (switchEl) {
+        switchEl.checked = isLight;
     }
 }
-document.getElementById("themeToggle").addEventListener("click", toggleTheme);
-
+document.getElementById('themeSwitch').addEventListener('change', toggleTheme);
 
 function saveSession(type, duration) {
     const now  = new Date();
@@ -167,8 +178,6 @@ function saveSession(type, duration) {
 const savedTheme = localStorage.getItem("protomoTheme");
 if (savedTheme === "light") {
     document.body.classList.add("light-mode");
-    document.getElementById("themeToggle").textContent = "Dark";
 }
-
-
+syncThemeSwitch();
 render();

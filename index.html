@@ -19,19 +19,30 @@
         </div>
     </nav>
 
-    <nav class="sub-nav" style="background: rgba(51, 50, 50, 0.5); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0.5rem 0;">
-        <div class="container d-flex align-items-center" style="position: relative;">
-            <div style="flex: 1; display: flex; justify-content: center; gap: 2rem;">
-                <span class="text-muted" style="font-family: 'Cinzel'; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; color: #f9b9f2; cursor: default;">Timer</span>
-                <span class="text-muted" style="font-family: 'Cinzel'; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;">History</span>
-                <span class="text-muted" style="font-family: 'Cinzel'; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;">Dashboard</span>
+    <nav class="sub-nav">
+    <div class="container">
+        <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+            <div style="width: 40px;"></div>
+                <div style="display: flex; gap: 2.5rem; justify-content: center;">
+                    <span class="nav-tab active" data-page="timer">Timer</span>
+                    <span class="nav-tab" data-page="history">History</span>
+                    <span class="nav-tab" data-page="dashboard">Dashboard</span>
+                </div>
+            <div id="themeMenu" style="display: none; position: absolute; right: 0; top: calc(100% + 0.5rem); background-color: var(--bg-card); border-radius: 12px; padding: 0.8rem 1.2rem; min-width: 180px; box-shadow: 0 15px 50px rgba(0,0,0,0.6); z-index: 20; border: 1px solid rgba(255,255,255,0.06);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <span style="font-family: 'Cinzel'; font-size: 0.85rem; color: var(--text-primary);">Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeSwitch">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
-            <button id="themeToggle" style="background: transparent; border: 1px solid var(--text-muted); color: var(--text-primary); border-radius: 50px; padding: 0.4rem 1.5rem; font-family: 'Cinzel'; font-size: 1rem; cursor: pointer; transition: 0.2s; flex-shrink: 0;">White</button>
         </div>
-    </nav>
+    </div>
+</nav>
     
 
-    <div class="container d-flex align-items-center justify-content-center" style="flex-direction: column; min-height: calc(100vh - 120px);">
+    <div class="main-container">
         <div class="card-wrapper" style="position: relative; width: 100%; max-width: 640px;">
             <div class="card" style="width: 100%; max-width: 640px;">
                 <div style="position: relative;" class="card-body text-center p-4 p-md-5">
@@ -73,12 +84,12 @@
             <div id="settingsPanel">
             <div class="row g-2 justify-content-center mb-4">
                 <div class="col-auto"  style="text-align: center; ">
-                    <label class="form-label text-muted small" style="color: #a0a0a0 !important;">Study (min)</label>
-                            <input type="number" id="studyInput" class="form-control" value="25" min="1" style="background: transparent; border-color: #a0a0a0; color: #eef4ed; font-family: 'Cinzel', serif; text-align: center;">
+                    <label class="form-label text-muted small">Study (min)</label>
+                            <input type="number" id="studyInput" class="form-control" value="25" min="1" style="background: transparent; border-color: #a0a0a0; font-family: 'Cinzel', serif; text-align: center;">
                 </div>
                 <div class="col-auto"  style="text-align: center; ">
-                    <label class="form-label text-muted small" style="color: #a0a0a0 !important;">Break (min)</label>
-                        <input type="number" id="breakInput" class="form-control" value="5" min="1" style="background: transparent; border-color: #a0a0a0; color: #eef4ed; font-family: 'Cinzel', serif; text-align: center;">
+                    <label class="form-label text-muted small">Break (min)</label>
+                        <input type="number" id="breakInput" class="form-control" value="5" min="1" style="background: transparent; border-color: #a0a0a0; font-family: 'Cinzel', serif; text-align: center;">
                 </div>
             </div>
             <div class="row justify-content-center mt-3">
